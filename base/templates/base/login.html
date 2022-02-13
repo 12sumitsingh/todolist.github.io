@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Todolist</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
+    
+    <style>
+
+        body{
+            background-color: gainsboro;
+            font-family: 'DM Sans', sans-serif;
+            padding-top: 120px;
+        }
+
+       
+        .container{
+                    max-width: 400px;
+                    margin:auto;
+                    background-color: lightcoral;
+                    padding: 20px;
+                    
+
+        }
+
+    </style>
+</head>
+<body>
+
+    
+    
+
+    <div class="container">
+        {% if page == 'login' %}
+        <h5>{{user_count}} User Available</h5>
+
+            <div>
+                <form method= "POST" action="">
+                    {% csrf_token %}
+
+                    <label>Username</label>
+                    <input type = "text" name = "username" placeholder="Enter userrname.." />
+                    <br>
+
+                    <br><label>Password</label>
+                    <input type = "password" name = "password" placeholder="Enter password.." />
+                    <br>
+                    <br><input type = "submit" value="LOGIN"/>
+                    
+                    
+                </form>
+                    <p>Have not signup yet?</p>
+                    <a href="{% url 'register' %}">Sign up</a>
+
+            </div>
+
+        {% else %}
+            <div>
+                <form method= "POST" action="">
+                    {% csrf_token %}
+                    {{form.as_p}}   
+
+                    <input type="submit" value="Register"/>
+
+                </form>
+                <p>alredy signup</p>
+                <a href="{% url 'login' %}">Login</a>
+            </div>
+
+        {% endif %}
+
+        <div>
+            {% for message in messages %}
+            <p>{{message}}</p>
+            {% endfor %} 
+        
+        </div>
+    </div>
+    
+</body>
+</html>
+
+
+
+
+   
+        
